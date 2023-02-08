@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.w3c.dom.Text;
 
 import com.mjc.stage2.entity.AbstractTextComponent;
+import com.mjc.stage2.entity.SymbolLeaf;
 import com.mjc.stage2.entity.TextComponent;
 import com.mjc.stage2.entity.TextComponentType;
 
@@ -18,7 +19,7 @@ public class LexemeParser extends AbstractTextParser
     @Override
     public void parse(AbstractTextComponent abstractTextComponent, String string)
     {
-        String[] lexemes = string.split(LEXEME_REGEX);
+        /*String[] lexemes = string.split(LEXEME_REGEX);
         List<String> filteredWords = Arrays.stream(lexemes)
                 .filter(lexeme -> lexeme.matches(WORD_REGEX))
                 .collect(Collectors.toList());
@@ -28,12 +29,12 @@ public class LexemeParser extends AbstractTextParser
             nextParser.parse(wordComposite, word);
 
             abstractTextComponent.add(wordComposite);
-        }
-        /*for (String lexeme : lexemes) {
-            TextComponent lexemeComposite = new TextComponent(TextComponentType.WORD);
-            nextParser.parse(lexemeComposite, lexeme);
-
-            abstractTextComponent.add(lexemeComposite);
         }*/
+        char[] arr = string.toCharArray();
+        for (char elem : arr)
+        {
+            abstractTextComponent.add(new SymbolLeaf(TextComponentType.WORD, elem));
+        }
+
     }
 }
